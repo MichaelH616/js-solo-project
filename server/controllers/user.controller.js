@@ -43,5 +43,20 @@ module.exports = {
             console.log(err);
             return res.status(400).json(err);
         }
+    },
+    logout: (req, res) => {
+        res.clearCookie("usertoken").json({message:"success"});
+        res.sendStatus(200);
+    },
+    
+    findOneUser: (req, res) => {
+        User.findOne({_id:req.params.id})
+        .then(oneUser => {
+            res.json(oneUser)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
     }
+    
 }
